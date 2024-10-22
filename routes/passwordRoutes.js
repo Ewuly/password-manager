@@ -4,6 +4,16 @@ const Password = require('../models/Password');
 
 const router = express.Router();
 
+// Route pour obtenir tous les mots de passe
+router.get('/', async (req, res) => {
+    try {
+        const passwords = await Password.find({}, 'username'); // Ne récupère que les noms d'utilisateur, pas les mots de passe
+        res.json(passwords);
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la récupération des mots de passe' });
+    }
+});
+
 // Route pour ajouter un mot de passe
 router.post('/', async (req, res) => {
     const { username, password } = req.body;
