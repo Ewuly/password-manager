@@ -11,8 +11,12 @@ const App = () => {
     const [passwords, setPasswords] = useState([]);
 
     const fetchPasswords = async () => {
-        const response = await axios.get('http://localhost:5000/api/passwords');
-        setPasswords(response.data);
+        try {
+            const response = await axios.get('http://localhost:5000/api/passwords');
+            setPasswords(response.data);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des mots de passe:', error);
+        }
     };
 
     const handlePasswordAdded = () => {
