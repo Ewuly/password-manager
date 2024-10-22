@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  backend:
+    build: ./password-manager-backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGODB_URI=mongodb://database:27017/password_manager
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+  frontend:
+    build: ./password-manager-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  database:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  app-network:
+    driver: bridge
