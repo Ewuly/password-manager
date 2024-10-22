@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
 // Route pour ajouter un mot de passe
 router.post('/', async (req, res) => {
     const { username, password } = req.body;
+    console.log('Tentative d\'ajout de mot de passe pour:', username);
 
     try {
         // Récupérer tous les mots de passe pour cet utilisateur
@@ -26,6 +27,7 @@ router.post('/', async (req, res) => {
         for (const existingPassword of existingPasswords) {
             const isMatch = await bcrypt.compare(password, existingPassword.password);
             if (isMatch) {
+                console.log('Mot de passe existant détecté pour:', username);
                 return res.status(400).json({ error: 'Ce mot de passe existe déjà pour cet utilisateur.' });
             }
         }
@@ -38,8 +40,10 @@ router.post('/', async (req, res) => {
         // Compter le nombre de mots de passe pour cet utilisateur
         const userPasswordsCount = await Password.countDocuments({ username });
 
+        console.log('Nouveau mot de passe ajouté pour:', username);
         res.status(201).json({ message: 'Mot de passe ajouté avec succès', userPasswordsCount });
     } catch (error) {
+        console.error('Erreur lors de l\'ajout du mot de passe:', error);
         res.status(500).json({ error: 'Erreur lors de l\'ajout du mot de passe' });
     }
 });
