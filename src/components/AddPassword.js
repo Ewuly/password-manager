@@ -20,8 +20,10 @@ const AddPassword = ({ onPasswordAdded }) => {
             setMessage({ text: response.data.message, type: 'success' });
         } catch (error) {
             if (error.response && error.response.status === 400) {
+                console.log('Erreur 400:', error.response.data);
                 setMessage({ text: error.response.data.error, type: 'error' });
             } else {
+                console.error('Erreur lors de l\'ajout du mot de passe:', error);
                 setMessage({ text: 'Erreur lors de l\'ajout du mot de passe.', type: 'error' });
             }
         }
