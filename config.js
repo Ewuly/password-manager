@@ -1,12 +1,14 @@
 // config.js
 const mongoose = require('mongoose');
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://database:27017/password_manager';
+
 
 const connectDB = async () => {
     try {
-        await mongoose.connect('mongodb://localhost:27017/password_manager', {
+        mongoose.connect(MONGODB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
-        });
+          });
         console.log('MongoDB connecté avec succès');
     } catch (error) {
         console.error('Erreur de connexion à MongoDB:', error);

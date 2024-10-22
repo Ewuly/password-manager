@@ -16,6 +16,7 @@ router.get('/', async (req, res) => {
 
 // Route pour ajouter un mot de passe
 router.post('/', async (req, res) => {
+    console.log('Requête reçue:', req.body);
     const { username, password } = req.body;
     console.log('Tentative d\'ajout de mot de passe pour:', username);
 
