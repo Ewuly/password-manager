@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import PasswordForm from './components/PasswordForm';
-import PasswordList from './components/PasswordList';
+import Header from './components/Header';
+import AddPassword from './components/AddPassword';
+import DeletePassword from './components/DeletePassword';
+import EditPassword from './components/EditPassword';
 import './App.css';
 
 const App = () => {
+    const [currentView, setCurrentView] = useState('add');
     const [passwords, setPasswords] = useState([]);
 
     const fetchPasswords = async () => {
@@ -16,8 +19,11 @@ const App = () => {
         fetchPasswords();
     };
 
-    const handleDelete = async (id) => {
-        await axios.delete(`http://localhost:5000/api/passwords/${id}`);
+    const handlePasswordDeleted = () => {
+        fetchPasswords();
+    };
+
+    const handlePasswordEdited = () => {
         fetchPasswords();
     };
 
@@ -27,9 +33,10 @@ const App = () => {
 
     return (
         <div className="app">
-            <h1>Gestionnaire de Mots de Passe</h1>
-            <PasswordForm onPasswordAdded={handlePasswordAdded} />
-            <PasswordList passwords={passwords} onDelete={handleDelete} />
+            <Header onSelect={setCurrentView} />
+            {currentView === 'add' && <AddPassword onPasswordAdded={handlePasswordAdded} />}
+            {currentView === 'delete' && <DeletePassword onPasswordDeleted={handlePasswordDeleted} />}
+            {currentView === 'edit' && <EditPassword onPasswordEdited={handlePasswordEdited} />}
         </div>
     );
 };

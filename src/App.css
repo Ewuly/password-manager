@@ -1,22 +1,52 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 0; /* Supprimer le padding par défaut */
+    height: 100vh; /* Prendre toute la hauteur de la fenêtre */
+    display: flex; /* Utiliser Flexbox */
+    justify-content: center; /* Centrer horizontalement */
+    align-items: center; /* Centrer verticalement */
 }
 
 .app {
-    max-width: 600px;
-    margin: auto;
+    max-width: 800px; /* Largeur maximale de l'application */
+    width: 100%; /* Prendre toute la largeur disponible */
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.header {
     text-align: center;
-    color: #333;
+    margin-bottom: 20px;
+    padding: 20px; /* Ajout d'un padding pour agrandir le header */
+    color: black; /* Couleur du texte */
+    border-radius: 8px; /* Coins arrondis */
+}
+
+.header h1 {
+    margin: 0; /* Supprime la marge par défaut */
+}
+
+.header nav {
+    margin-top: 10px; /* Espace entre le titre et les boutons */
+}
+
+.header button {
+    margin: 0 10px;
+    padding: 10px 20px; /* Augmenter le padding pour les boutons */
+    background-color: #007bff; /* Couleur des boutons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.header button:hover {
+    background-color: #004494; /* Couleur au survol */
 }
 
 .password-form {
@@ -30,6 +60,8 @@ h1 {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+    width: 100%; /* S'assurer que les champs de saisie prennent toute la largeur */
 }
 
 .password-form button {
@@ -39,10 +71,34 @@ h1 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%; /* S'assurer que le bouton prend toute la largeur */
 }
 
 .password-form button:hover {
     background-color: #218838;
+}
+
+.alert {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff; /* Couleur du bouton */
 }
 
 .password-list {
@@ -58,6 +114,7 @@ h1 {
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 10px;
+    background-color: #f9f9f9;
 }
 
 .password-list button {
@@ -66,28 +123,9 @@ h1 {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .password-list button:hover {
     background-color: #c82333;
-}
-
-.password-input-container {
-    position: relative;
-}
-
-.password-input-container input {
-    width: calc(100% - 40px); /* Ajuste la largeur pour le bouton */
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: #007bff; /* Couleur du bouton */
 }
